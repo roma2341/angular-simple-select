@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgxSelectLibrary } from './ngx-select-library';
+import { NgxSelectZigzag } from './ngx-select-zigzag';
 
-describe('NgxSelectLibrary', () => {
-  let component: NgxSelectLibrary;
-  let fixture: ComponentFixture<NgxSelectLibrary>;
+describe('NgxSelectZigzag', () => {
+  let component: NgxSelectZigzag;
+  let fixture: ComponentFixture<NgxSelectZigzag>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NgxSelectLibrary]
+      imports: [NgxSelectZigzag]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NgxSelectLibrary);
+    fixture = TestBed.createComponent(NgxSelectZigzag);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'lib-ngx-select-library',
+  selector: 'ngx-select-zigzag',
   imports: [],
   template: `
     <p>
@@ -10,6 +10,6 @@ import { Component } from '@angular/core';
   `,
   styles: ``
 })
-export class NgxSelectLibrary {
+export class NgxSelectZigzag {
 
 }

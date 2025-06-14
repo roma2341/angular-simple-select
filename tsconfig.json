@@ -12,8 +12,8 @@
     "isolatedModules": true,
     "experimentalDecorators": true,
     "paths": {
-      "ngx-select-library": [
-        "./dist/ngx-select-library"
+      "ngx-select-zigzag": [
+        "./dist/ngx-select-zigzag"
       ]
     },
     "importHelpers": true,
@@ -30,10 +30,10 @@
   "files": [],
   "references": [
     {
-      "path": "./projects/ngx-select-library/tsconfig.lib.json"
+      "path": "./projects/ngx-select-zigzag/tsconfig.lib.json"
     },
     {
-      "path": "./projects/ngx-select-library/tsconfig.spec.json"
+      "path": "./projects/ngx-select-zigzag/tsconfig.spec.json"
     }
   ]
 }

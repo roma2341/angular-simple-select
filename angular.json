@@ -3,20 +3,20 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-select-library": {
+    "ngx-select-zigzag": {
       "projectType": "library",
-      "root": "projects/ngx-select-library",
-      "sourceRoot": "projects/ngx-select-library/src",
+      "root": "projects/ngx-select-zigzag",
+      "sourceRoot": "projects/ngx-select-zigzag/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
           "configurations": {
             "production": {
-              "tsConfig": "projects/ngx-select-library/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngx-select-zigzag/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/ngx-select-library/tsconfig.lib.json"
+              "tsConfig": "projects/ngx-select-zigzag/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -24,7 +24,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "tsConfig": "projects/ngx-select-library/tsconfig.spec.json",
+            "tsConfig": "projects/ngx-select-zigzag/tsconfig.spec.json",
             "polyfills": [
               "zone.js"
             ]
