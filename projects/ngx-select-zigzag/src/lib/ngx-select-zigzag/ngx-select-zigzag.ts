@@ -40,8 +40,18 @@ export class NgxSelectZigzag implements ControlValueAccessor{
   })
 
   selectedOption = computed(()=>{
-
-    return this.optionValueToOption().get(this.value())
+    const val = this.value();
+    if(val == null){
+      return undefined;
+    }
+    return this.optionValueToOption().get(val);
+  });
+  selectedOptionLabel = computed(()=>{
+    const val = this.selectedOption();
+    if(val == null){
+      return undefined;
+    }
+    return this.getOptionLabel(val);
   });
 
   private onChange = (_: SelectorValue | undefined) => {};

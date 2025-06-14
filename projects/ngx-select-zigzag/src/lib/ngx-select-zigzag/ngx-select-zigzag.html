@@ -4,26 +4,26 @@
       {{placeholder()}}
     }
     @if(multiple()){
-      {{ value?.length }} selected
+      {{ multiValue()?.length }} selected
     }
-    @else{
-      value
+    @else if(value()){
+      {{selectedOptionLabel()}}
     }
-    <ng-container *ngIf="!multiple && value">
-      {{ options.find(o => o[valueKey] === value)?.[labelKey] }}
-    </ng-container>
   </div>
 
-  <div class="dropdown" *ngIf="isOpen">
-    <div *ngFor="let option of options"
-         (click)="selectOption(option)"
-         [class.selected]="isSelected(option)">
-      <ng-container *ngIf="optionTemplate; else defaultTpl">
-        <ng-container *ngTemplateOutlet="optionTemplate; context: {$implicit: option}"></ng-container>
-      </ng-container>
-      <ng-template #defaultTpl>
-        {{ option[labelKey] }}
-      </ng-template>
+  @if(isOpen()){
+    <div class="dropdown">
+      @for(option of options(); track option){
+        <div (click)="selectOption(option)"
+             [class.selected]="isSelected(option)">
+          @if(optionTemplate()){
+              <ng-container *ngTemplateOutlet="optionTemplate; context: {$implicit: option}"></ng-container>
+          }
+          @else{
+            {{ option[labelKey()] }}
+          }
+        </div>
+      }
     </div>
-  </div>
+  }
 </div>
