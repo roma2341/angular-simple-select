@@ -2,4 +2,4 @@
  * Public API Surface of select-library
  */
 
-export * from './lib/ngx-select-zigzag';
+export * from './lib/ngx-select-zigzag/ngx-select-zigzag';
