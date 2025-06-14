@@ -3,5 +3,34 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "ngx-select-library": {
+      "projectType": "library",
+      "root": "projects/ngx-select-library",
+      "sourceRoot": "projects/ngx-select-library/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-select-library/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-select-library/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/ngx-select-library/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js"
+            ]
+          }
+        }
+      }
+    }
   }
 }
