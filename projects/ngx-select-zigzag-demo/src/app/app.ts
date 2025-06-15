@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgxSelectZigzag } from 'ngx-select-zigzag';
 
@@ -7,6 +7,7 @@ import { NgxSelectZigzag } from 'ngx-select-zigzag';
   imports: [RouterOutlet, NgxSelectZigzag],
   templateUrl: './app.html',
   styleUrl: './app.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
   protected title = 'ngx-select-zigzag-demo';

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   computed,
   input,
@@ -16,6 +17,7 @@ import { SelectorOptionLabelPipe } from '../../pipes/selector-option-label-pipe'
   imports: [SelectorOptionLabelPipe],
   templateUrl: './ngx-select-zigzag.html',
   styleUrl: './ngx-select-zigzag.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxSelectZigzag implements ControlValueAccessor {
   options = input<SelectorOption[]>([]);
@@ -56,13 +58,6 @@ export class NgxSelectZigzag implements ControlValueAccessor {
       return undefined;
     }
     return this.optionValueToOption().get(val);
-  });
-  selectedOptionLabel = computed(() => {
-    const val = this.selectedOption();
-    if (val == null) {
-      return undefined;
-    }
-    return this.getOptionLabel(val);
   });
 
   private onChange = (_: SelectorValue | undefined) => {};
