@@ -1,4 +1,4 @@
-.custom-selector {
+.select-wrapper {
   border: 1px solid #ccc;
   padding: 8px;
   border-radius: 6px;
@@ -6,34 +6,33 @@
   width: 100%;
   cursor: pointer;
   background: white;
+}
+.select-placeholder {
+  color: #666;
+}
 
-  .placeholder {
-    color: #666;
-  }
+.options-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  background: white;
+  z-index: 10;
 
-  .dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    max-height: 200px;
-    overflow-y: auto;
-    border: 1px solid #ddd;
-    background: white;
-    z-index: 10;
+  div {
+    padding: 8px;
+    cursor: pointer;
 
-    div {
-      padding: 8px;
-      cursor: pointer;
+    &.selected {
+      background: #f0f0f0;
+      font-weight: bold;
+    }
 
-      &.selected {
-        background: #f0f0f0;
-        font-weight: bold;
-      }
-
-      &:hover {
-        background: #eaeaea;
-      }
+    &:hover {
+      background: #eaeaea;
     }
   }
 }

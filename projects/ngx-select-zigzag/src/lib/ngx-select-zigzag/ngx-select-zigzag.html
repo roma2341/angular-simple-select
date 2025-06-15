@@ -1,12 +1,12 @@
 <div
   cdkOverlayOrigin
   #trigger="cdkOverlayOrigin"
-  class="custom-selector"
+  class="select-wrapper"
   (click)="openDropdown()"
   tabindex="0"
   (blur)="closeDropdown()"
 >
-  <div class="placeholder">
+  <div class="select-placeholder">
     @if (!multiValue()?.length && !value()) {
       {{ placeholder() }}
     }
@@ -18,7 +18,7 @@
     }
   </div>
   <ng-template #overlayTemplate>
-    <div class="dropdown">
+    <div class="options-dropdown">
       @for (option of options(); track option) {
         <div (click)="selectOption(option)" [class.selected]="isSelected(option)">
           @if (optionTemplate()) {
