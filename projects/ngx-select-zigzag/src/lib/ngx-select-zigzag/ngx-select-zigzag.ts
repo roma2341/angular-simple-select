@@ -86,9 +86,9 @@ export class NgxSelectZigzag implements ControlValueAccessor {
       this.onChange(this.multiValue());
     } else {
       this.value.set(optionVal);
-      this.isOpen.set(false);
       this.onChange(this.value());
     }
+    this.isOpen.set(false);
   }
 
   isSelected(option: SelectorValue): boolean {
