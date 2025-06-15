@@ -4,7 +4,8 @@
   "peerDependencies": {
     "@angular/common": "^20.0.0",
     "@angular/core": "^20.0.0",
-    "@angular/cdk": "20.0.3"
+    "@angular/cdk": "20.0.3",
+    "subsink": "^1.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

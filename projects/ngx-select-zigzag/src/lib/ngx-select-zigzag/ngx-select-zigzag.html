@@ -1,4 +1,11 @@
-<div class="custom-selector" (click)="toggleDropdown()" tabindex="0" (blur)="isOpen.set(false)">
+<div
+  cdkOverlayOrigin
+  #trigger="cdkOverlayOrigin"
+  class="custom-selector"
+  (click)="openDropdown()"
+  tabindex="0"
+  (blur)="closeDropdown()"
+>
   <div class="placeholder">
     @if (!multiValue()?.length && !value()) {
       {{ placeholder() }}
@@ -10,8 +17,7 @@
       {{ selectedOptionVal | selectorOptionLabel: labelKey() }}
     }
   </div>
-
-  @if (isOpen()) {
+  <ng-template #overlayTemplate>
     <div class="dropdown">
       @for (option of options(); track option) {
         <div (click)="selectOption(option)" [class.selected]="isSelected(option)">
@@ -23,5 +29,5 @@
         </div>
       }
     </div>
-  }
+  </ng-template>
 </div>
