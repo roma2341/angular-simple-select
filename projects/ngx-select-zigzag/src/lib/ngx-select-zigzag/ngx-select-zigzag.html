@@ -15,6 +15,7 @@
       {{ multiValue()?.length }} selected
     } @else if (selectedOptionVal) {
       {{ selectedOptionVal | selectorOptionLabel: labelKey() }}
+      <div (click)="clearValue()" class="clear-icon"></div>
     }
   </div>
   <ng-template #overlayTemplate>

@@ -158,9 +158,6 @@ export class NgxSelectZigzag implements ControlValueAccessor {
     });
   }
 
-  private onChange = (_: SelectorValue | undefined) => {};
-  private onTouched = () => {};
-
   toggleDropdown() {
     if (this.isItemsDropDownOpen()) {
       this.closeDropdown();
@@ -180,9 +177,9 @@ export class NgxSelectZigzag implements ControlValueAccessor {
     if (this.multiple()) {
       const exists = this.multiValue().includes(optionVal);
       if (exists) {
-        this.value.set(this.multiValue().filter((v: SelectorValue) => v !== optionVal));
+        this.multiValue.set(this.multiValue().filter((v: SelectorValue) => v !== optionVal));
       } else {
-        this.value.set([...this.multiValue(), optionVal]);
+        this.multiValue.set([...this.multiValue(), optionVal]);
       }
       this.onChange(this.multiValue());
     } else {
@@ -203,6 +200,17 @@ export class NgxSelectZigzag implements ControlValueAccessor {
   getOptionLabel(option: SelectorOption): string {
     return SelectorOptionUtils.getOptionLabel(option, this.labelKey());
   }
+  clearValue() {
+    this.value.set(undefined);
+    this.multiValue.set([]);
+  }
+
+  /***
+   CVA
+   ***/
+
+  private onChange = (_: SelectorValue | undefined) => {};
+  private onTouched = () => {};
 
   writeValue(value: any): void {
     this.value = value;

@@ -1,3 +1,6 @@
+:host {
+  display: inline-flex;
+}
 .select-wrapper {
   border: 1px solid #ccc;
   padding: 8px;
@@ -9,6 +12,9 @@
 }
 .select-placeholder {
   color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .options-dropdown {
@@ -34,5 +40,34 @@
     &:hover {
       background: #eaeaea;
     }
+  }
+}
+
+.clear-icon {
+  display: inline-block;
+  font-size: inherit;
+  cursor: pointer;
+  position: relative;
+  width: 1em;
+  height: 0.75em;
+  padding: 0;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    border-top: 3px solid;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
   }
 }

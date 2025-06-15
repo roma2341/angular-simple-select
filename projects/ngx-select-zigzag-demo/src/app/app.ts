@@ -10,7 +10,6 @@ import { NgxSelectZigzag } from 'ngx-select-zigzag';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
-  protected title = 'ngx-select-zigzag-demo';
   protected options: OptionItem[] = [
     {
       label: 'Canada',

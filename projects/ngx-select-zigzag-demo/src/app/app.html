@@ -1,6 +1,18 @@
-<ngx-select-zigzag
-  [labelKey]="'label'"
-  [valueKey]="'value'"
-  [options]="options"
-></ngx-select-zigzag>
-<router-outlet />
+<div class="content-wrapper">
+  <div class="examples-list">
+    <div class="example-item">
+      <span>Single select</span>
+      <ngx-select-zigzag [labelKey]="'label'" [valueKey]="'value'" [options]="options"></ngx-select-zigzag>
+    </div>
+    <div class="example-item">
+      <span>Multi select</span>
+      <ngx-select-zigzag
+        [labelKey]="'label'"
+        [valueKey]="'value'"
+        [options]="options"
+        [multiple]="true"
+      ></ngx-select-zigzag>
+    </div>
+  </div>
+  <router-outlet />
+</div>
