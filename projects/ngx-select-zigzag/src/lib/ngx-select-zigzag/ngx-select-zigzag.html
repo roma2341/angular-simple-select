@@ -1,29 +1,26 @@
-<div class="custom-selector" (click)="toggleDropdown()" tabindex="0" (blur)="isOpen.set(false)">
+<div
+  class="custom-selector"
+  (click)="toggleDropdown()"
+  tabindex="0"
+  (blur)="isOpen.set(false)"
+>
   <div class="placeholder">
-    @if(!multiValue()?.length && !value()){
-      {{placeholder()}}
-    }
-    @if(multiple()){
-      {{ multiValue()?.length }} selected
-    }
-    @else if(value()){
-      {{selectedOptionLabel()}}
-    }
+    @if(!multiValue()?.length && !value()){ {{placeholder()}} } @if(multiple()){
+    {{ multiValue()?.length }} selected } @else if(value()){
+    {{selectedOptionLabel()}} }
   </div>
 
   @if(isOpen()){
-    <div class="dropdown">
-      @for(option of options(); track option){
-        <div (click)="selectOption(option)"
-             [class.selected]="isSelected(option)">
-          @if(optionTemplate()){
-              <ng-container *ngTemplateOutlet="optionTemplate; context: {$implicit: option}"></ng-container>
-          }
-          @else{
-            {{ option[labelKey()] }}
-          }
-        </div>
-      }
+  <div class="dropdown">
+    @for(option of options(); track option){
+    <div (click)="selectOption(option)" [class.selected]="isSelected(option)">
+      @if(optionTemplate()){
+      <ng-container
+        *ngTemplateOutlet="optionTemplate; context: {$implicit: option}"
+      ></ng-container>
+      } @else{ {{ option | selectorOptionLabel }} }
     </div>
+    }
+  </div>
   }
 </div>

@@ -1,13 +1,23 @@
-import { Component, computed, input, model, signal, TemplateRef } from '@angular/core';
+import {
+  Component,
+  computed,
+  input,
+  model,
+  signal,
+  TemplateRef,
+} from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import { SelectorOption, SelectorValue } from '../../types/SelectorTypes';
+import { SelectorOptionUtils } from '../../utils/SelectorOptionUtils';
+import { SelectorOptionLabelPipe } from '../../pipes/selector-option-label-pipe';
 
 @Component({
   selector: 'ngx-select-zigzag',
-  imports: [],
+  imports: [SelectorOptionLabelPipe],
   templateUrl: './ngx-select-zigzag.html',
-  styleUrl: './ngx-select-zigzag.scss'
+  styleUrl: './ngx-select-zigzag.scss',
 })
-export class NgxSelectZigzag implements ControlValueAccessor{
+export class NgxSelectZigzag implements ControlValueAccessor {
   options = input<SelectorOption[]>([]);
   labelKey = input<string | undefined>();
   valueKey = input<string | undefined>();
@@ -20,35 +30,36 @@ export class NgxSelectZigzag implements ControlValueAccessor{
 
   isOpen = signal(false);
 
-  optionValueToOption = computed<Map<SelectorValue,SelectorOption>>(()=>{
-    const res = new Map<SelectorValue,SelectorOption>();
-    for(const option of this.options()){
+  optionValueToOption = computed<Map<SelectorValue, SelectorOption>>(() => {
+    const res = new Map<SelectorValue, SelectorOption>();
+    for (const option of this.options()) {
       const optionVal = this.getOptionValue(option);
-      res.set(optionVal,option);
+      res.set(optionVal, option);
     }
     return res;
   });
 
-  selectedOptions = computed(()=>{
+  selectedOptions = computed(() => {
     const multiValue = this.multiValue();
-    if(multiValue.length > 0){
-      return multiValue.map(val=>{
+    if (multiValue.length > 0) {
+      return multiValue.map((val) => {
         return this.optionValueToOption().get(val);
-      })
+      });
     }
+    return [];
     //return this.multiValue().map(v => this.getOptionLabel(v)).join(', ');
-  })
+  });
 
-  selectedOption = computed(()=>{
+  selectedOption = computed(() => {
     const val = this.value();
-    if(val == null){
+    if (val == null) {
       return undefined;
     }
     return this.optionValueToOption().get(val);
   });
-  selectedOptionLabel = computed(()=>{
+  selectedOptionLabel = computed(() => {
     const val = this.selectedOption();
-    if(val == null){
+    if (val == null) {
       return undefined;
     }
     return this.getOptionLabel(val);
@@ -65,10 +76,11 @@ export class NgxSelectZigzag implements ControlValueAccessor{
     const optionVal = this.getOptionValue(option);
     if (this.multiple()) {
       const exists = this.multiValue().includes(optionVal);
-      if(exists){
-        this.value.set(this.multiValue().filter((v: SelectorValue) => v !== optionVal));
-      }
-      else {
+      if (exists) {
+        this.value.set(
+          this.multiValue().filter((v: SelectorValue) => v !== optionVal),
+        );
+      } else {
         this.value.set([...this.multiValue(), optionVal]);
       }
       this.onChange(this.multiValue());
@@ -87,10 +99,10 @@ export class NgxSelectZigzag implements ControlValueAccessor{
   }
 
   getOptionValue(option: SelectorOption): SelectorValue {
-    return this.valueKey() ? option[this.valueKey() as keyof object] : option;
+    return SelectorOptionUtils.getOptionValue(option, this.valueKey());
   }
   getOptionLabel(option: SelectorOption): string {
-    return this.labelKey() ? option[this.labelKey() as keyof object] : option as string;
+    return SelectorOptionUtils.getOptionLabel(option, this.labelKey());
   }
 
   writeValue(value: any): void {
@@ -105,5 +117,3 @@ export class NgxSelectZigzag implements ControlValueAccessor{
     this.onTouched = fn;
   }
 }
-type SelectorValue = string | number | object | boolean;
-type SelectorOption = string | number | object | boolean;
