@@ -10,10 +10,5 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false,
-  "exports": {
-    "./scss/default.theme": {
-      "style": "./scss/default.theme.scss"
-    }
-  }
+  "sideEffects": false
 }

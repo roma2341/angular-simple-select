@@ -36,7 +36,8 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "changeDetection": "OnPush"
         }
       },
       "root": "projects/ngx-select-zigzag-demo",
@@ -60,7 +61,10 @@
             ],
             "styles": [
               "projects/ngx-select-zigzag-demo/src/styles.scss"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src", "."]
+            }
           },
           "configurations": {
             "production": {

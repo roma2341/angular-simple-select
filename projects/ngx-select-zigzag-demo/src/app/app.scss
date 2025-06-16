@@ -1,4 +1,5 @@
-@import '../../ngx-select-zigzag/src/themes/default.theme.scss';
+@use 'projects/ngx-select-zigzag/src/themes/default_theme' as *;
+//@import '../../ngx-select-zigzag/src/themes/default_theme.scss';
 ngx-select-zigzag {
   width: 400px;
 }
