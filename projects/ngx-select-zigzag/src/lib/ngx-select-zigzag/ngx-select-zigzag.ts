@@ -28,6 +28,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
   templateUrl: './ngx-select-zigzag.html',
   styleUrl: './ngx-select-zigzag.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'ngx-select-zigzag',
+  },
 })
 export class NgxSelectZigzag implements ControlValueAccessor {
   private readonly overlay = inject(Overlay);

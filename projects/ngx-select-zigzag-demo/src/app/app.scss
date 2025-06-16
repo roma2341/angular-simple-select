@@ -1,3 +1,4 @@
+@import '../../ngx-select-zigzag/src/themes/default.theme.scss';
 ngx-select-zigzag {
   width: 400px;
 }
@@ -8,4 +9,7 @@ ngx-select-zigzag {
 .example-item {
   display: flex;
   flex-direction: column;
+}
+:host.default-theme ::ng-deep {
+  @include default-theme();
 }

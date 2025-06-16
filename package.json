@@ -4,13 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "build:package": "ng build ngx-select-zigzag",
-    "build:demo": "ng build ngx-select-zigzag-demo",
+    "build": "ng build ngx-select-zigzag --configuration development && npm run build:themes",
+    "build:package": "ng build ngx-select-zigzag --configuration development",
+    "build:demo": "ng build ngx-select-zigzag-demo --configuration development",
     "watch": "ng build --watch --configuration development",
     "watch:lib": "ng build ngx-select-zigzag --watch --configuration development",
     "test": "ng test --browsers=ChromeHeadlessNoSandbox --watch false",
-    "test:ngx-select-ex": "ng test ngx-select-ex --browsers=ChromeHeadlessNoSandbox --watch false"
+    "test:ngx-select-ex": "ng test ngx-select-ex --browsers=ChromeHeadlessNoSandbox --watch false",
+    "build:themes": "sass projects/ngx-select-zigzag/src/themes/:dist/ngx-select-zigzag/themes/ --style=compressed",
+    "copy-sass-deprecated": "mkdir -p dist/ngx-select-zigzag/scss && cp src/ngx-select-zigzag/**/*.scss dist/ngx-select-zigzag/scss"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +41,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^20.0.0",
     "prettier": "^3.5.3",
-    "typescript": "~5.8.2"
+    "typescript": "~5.8.2",
+    "sass":"^1.89.2"
   }
-}
+  }
