@@ -2,6 +2,10 @@
   .ngx-select-zigzag {
     .select-wrapper {
       border-color: #e5e8ed;
+      border-radius: 12px;
+    }
+    .select-placeholder {
+      color: #707787;
     }
   }
 }

@@ -6,18 +6,21 @@
   tabindex="0"
   (blur)="closeDropdown()"
 >
-  <div class="select-placeholder">
-    @if (!multiValue()?.length && !value()) {
+  @if (!multiValue()?.length && !value()) {
+    <div class="select-placeholder">
       {{ placeholder() }}
-    }
-    @let selectedOptionVal = selectedOption();
-    @if (multiple()) {
-      {{ multiValue()?.length }} selected
-    } @else if (selectedOptionVal) {
-      {{ selectedOptionVal | selectorOptionLabel: labelKey() }}
-      <div (click)="clearValue()" class="clear-icon"></div>
-    }
-  </div>
+    </div>
+  } @else {
+    <div class="select-value">
+      @let selectedOptionVal = selectedOption();
+      @if (multiple()) {
+        {{ multiValue()?.length }} selected
+      } @else if (selectedOptionVal) {
+        {{ selectedOptionVal | selectorOptionLabel: labelKey() }}
+        <div (click)="clearValue()" class="clear-icon"></div>
+      }
+    </div>
+  }
   <ng-template #overlayTemplate>
     <div class="options-dropdown">
       @for (option of options(); track option) {

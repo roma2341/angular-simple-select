@@ -1,5 +1,5 @@
-@use 'projects/ngx-select-zigzag/src/themes/default_theme' as *;
-//@import '../../ngx-select-zigzag/src/themes/default_theme.scss';
+@use 'projects/ngx-select-zigzag/src/themes/default_theme' as defaultTheme;
+//@import 'projects/ngx-select-zigzag/src/themes/default_theme';
 ngx-select-zigzag {
   width: 400px;
 }
@@ -11,6 +11,6 @@ ngx-select-zigzag {
   display: flex;
   flex-direction: column;
 }
-:host.default-theme ::ng-deep {
-  @include default-theme();
+:host .default-theme ::ng-deep {
+  @include defaultTheme.default-theme();
 }
