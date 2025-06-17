@@ -86,3 +86,7 @@
     transform: rotate(-45deg);
   }
 }
+.options-dropdown-header {
+  display: flex;
+  flex-direction: column;
+}

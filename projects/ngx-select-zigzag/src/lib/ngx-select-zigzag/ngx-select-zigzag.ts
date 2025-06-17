@@ -21,12 +21,13 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { SubSink } from 'subsink';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { NgxSelectZigzagFormField } from '../features/input/ngx-select-zigzag-form-field/ngx-select-zigzag-form-field';
 
 const KEY_CODE_TO_OPTIONS_OVERLAY_CLOSE = 'Escape';
 
 @Component({
   selector: 'ngx-select-zigzag',
-  imports: [SelectorOptionLabelPipe, CdkOverlayOrigin],
+  imports: [SelectorOptionLabelPipe, CdkOverlayOrigin, NgxSelectZigzagFormField],
   templateUrl: './ngx-select-zigzag.html',
   styleUrl: './ngx-select-zigzag.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

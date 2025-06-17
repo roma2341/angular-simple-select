@@ -1,0 +1,12 @@
+:host ::ng-deep {
+  input {
+    border: none !important;
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+  }
+}
+.content-wrapper {
+  border: 1px solid #e5e8ed;
+  padding: 8px;
+  border-radius: 12px;
+}
