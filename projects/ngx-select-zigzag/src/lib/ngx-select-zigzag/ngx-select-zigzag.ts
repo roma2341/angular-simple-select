@@ -141,13 +141,14 @@ export class NgxSelectZigzag implements ControlValueAccessor {
       this.overlayRef.dispose();
       this.overlayRef = undefined;
     }
+    const triggerWidth = this.trigger()?.elementRef?.nativeElement?.getBoundingClientRect().width;
     this.overlaySubscriptions.unsubscribe();
     // Create the overlay with the position strategy
     this.overlayRef = this.overlay.create({
       positionStrategy: this.positionStrategy()!,
       backdropClass: ['cdk-overlay-transparent-backdrop'],
       hasBackdrop: true,
-      width: '477px',
+      width: triggerWidth,
       maxHeight: 'calc(100% - 64px)',
     });
 
