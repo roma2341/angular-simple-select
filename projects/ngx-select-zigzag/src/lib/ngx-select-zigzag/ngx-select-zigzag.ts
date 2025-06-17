@@ -22,12 +22,20 @@ import { SubSink } from 'subsink';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { NgxSelectZigzagFormField } from '../features/input/ngx-select-zigzag-form-field/ngx-select-zigzag-form-field';
+import { CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 const KEY_CODE_TO_OPTIONS_OVERLAY_CLOSE = 'Escape';
 
 @Component({
   selector: 'ngx-select-zigzag',
-  imports: [SelectorOptionLabelPipe, CdkOverlayOrigin, NgxSelectZigzagFormField],
+  imports: [
+    SelectorOptionLabelPipe,
+    CdkOverlayOrigin,
+    NgxSelectZigzagFormField,
+    CdkVirtualScrollViewport,
+    CdkVirtualForOf,
+    CdkFixedSizeVirtualScroll,
+  ],
   templateUrl: './ngx-select-zigzag.html',
   styleUrl: './ngx-select-zigzag.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

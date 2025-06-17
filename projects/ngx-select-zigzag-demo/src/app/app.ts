@@ -10,22 +10,19 @@ import { NgxSelectZigzag } from 'ngx-select-zigzag';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
-  protected options: OptionItem[] = [
-    {
-      label: 'Canada',
-      value: 'CA',
-    },
-    {
-      label: 'United States',
-      value: 'US',
-    },
-    {
-      label: 'Mexico',
-      value: 'MX',
-    },
-  ];
+  protected options = generateRandomOptions(1000);
 }
 type OptionItem = {
   label: string;
   value: string;
 };
+function generateRandomOptions(itemsCount: number) {
+  const options: OptionItem[] = [];
+  for (let i = 0; i < itemsCount; i++) {
+    options.push({
+      label: 'Item - ' + i,
+      value: 'Value - ' + i,
+    });
+  }
+  return options;
+}

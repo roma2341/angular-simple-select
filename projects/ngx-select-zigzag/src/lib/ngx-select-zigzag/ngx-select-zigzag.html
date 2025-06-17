@@ -32,15 +32,17 @@
           <input #searchInputRef (keyup)="inputKeyUp(searchInputRef.value, $event)" />
         </ngx-select-zigzag-form-field>
       </div>
-      @for (option of options(); track option) {
-        <div class="options-dropdown-item" (click)="selectOption(option)" [class.selected]="isSelected(option)">
-          @if (optionTemplate()) {
-            <ng-container *ngTemplateOutlet="optionTemplate; context: { $implicit: option }"></ng-container>
-          } @else {
-            {{ option | selectorOptionLabel: labelKey() }}
-          }
+      <cdk-virtual-scroll-viewport [itemSize]="34" class="options-viewport">
+        <div *cdkVirtualFor="let option of options()" class="example-item">
+          <div class="options-dropdown-item" (click)="selectOption(option)" [class.selected]="isSelected(option)">
+            @if (optionTemplate()) {
+              <ng-container *ngTemplateOutlet="optionTemplate; context: { $implicit: option }"></ng-container>
+            } @else {
+              {{ option | selectorOptionLabel: labelKey() }}
+            }
+          </div>
         </div>
-      }
+      </cdk-virtual-scroll-viewport>
     </div>
   </ng-template>
 </div>
