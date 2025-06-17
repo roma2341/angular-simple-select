@@ -19,11 +19,19 @@
   align-items: center;
   justify-content: space-between;
 }
-.select-value {
+.select-value-wrapper {
   color: black;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.select-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .options-dropdown {
@@ -47,13 +55,15 @@
     background: #eaeaea;
   }
 }
+.clear-icon-wrapper {
+}
 
 .clear-icon {
   display: inline-block;
   font-size: inherit;
   cursor: pointer;
   position: relative;
-  width: 1em;
+  width: 12px;
   height: 12px;
   padding: 0;
 

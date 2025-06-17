@@ -11,14 +11,18 @@
       {{ placeholder() }}
     </div>
   } @else {
-    <div class="select-value">
+    <div class="select-value-wrapper">
       @let selectedOptionVal = selectedOption();
-      @if (multiple()) {
-        {{ multiValue()?.length }} selected
-      } @else if (selectedOptionVal) {
-        {{ selectedOptionVal | selectorOptionLabel: labelKey() }}
+      <div class="select-value">
+        @if (multiple()) {
+          {{ multiValue()?.length }} selected
+        } @else if (selectedOptionVal) {
+          {{ selectedOptionVal | selectorOptionLabel: labelKey() }}
+        }
+      </div>
+      <div class="clear-icon-wrapper">
         <div (click)="$event.stopPropagation(); clearValue()" class="clear-icon"></div>
-      }
+      </div>
     </div>
   }
   <ng-template #overlayTemplate>
