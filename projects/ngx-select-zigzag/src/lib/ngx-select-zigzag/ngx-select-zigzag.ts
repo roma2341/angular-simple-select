@@ -22,6 +22,8 @@ import { SubSink } from 'subsink';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
+const KEY_CODE_TO_OPTIONS_OVERLAY_CLOSE = 'Escape';
+
 @Component({
   selector: 'ngx-select-zigzag',
   imports: [SelectorOptionLabelPipe, CdkOverlayOrigin],
@@ -47,8 +49,9 @@ export class NgxSelectZigzag implements ControlValueAccessor {
   value = model<SelectorValue | undefined>(undefined);
   multiValue = model<SelectorValue[]>([]);
 
-  isItemsDropDownOpen = signal(false);
-  $isItemsDropDownOpen = toObservable(this.isItemsDropDownOpen);
+  isOptionsDropDownOpen = signal(false);
+  $isOptionsDropDownOpen = toObservable(this.isOptionsDropDownOpen);
+  searchValue = signal<string>('');
 
   optionValueToOption = computed<Map<SelectorValue, SelectorOption>>(() => {
     const res = new Map<SelectorValue, SelectorOption>();
@@ -79,7 +82,7 @@ export class NgxSelectZigzag implements ControlValueAccessor {
   });
 
   private overlayRef?: OverlayRef;
-  private overlaySubscriptions = new SubSink();
+  private optionsDropDownOverlaySubscriptions = new SubSink();
   @ViewChild('overlayTemplate') overlayTemplate!: TemplateRef<any>;
   trigger = viewChild<CdkOverlayOrigin>('trigger');
 
@@ -121,28 +124,28 @@ export class NgxSelectZigzag implements ControlValueAccessor {
   });
 
   constructor() {
-    this.$isItemsDropDownOpen
+    this.$isOptionsDropDownOpen
       .pipe(distinctUntilChanged(), debounceTime(100), takeUntilDestroyed(this.destroyRef))
       .subscribe((isPopupVisible) => {
         if (isPopupVisible) {
-          this.openOverlay();
+          this.openOptionsDropdownOverlay();
         } else {
-          this.closeOverlay();
+          this.closeOptionsDropdownOverlay();
         }
       });
   }
 
-  private closeOverlay() {
+  private closeOptionsDropdownOverlay() {
     this.overlayRef?.dispose();
     this.overlayRef = undefined;
   }
-  openOverlay() {
+  openOptionsDropdownOverlay() {
     if (this.overlayRef != null) {
       this.overlayRef.dispose();
       this.overlayRef = undefined;
     }
     const triggerWidth = this.trigger()?.elementRef?.nativeElement?.getBoundingClientRect().width;
-    this.overlaySubscriptions.unsubscribe();
+    this.optionsDropDownOverlaySubscriptions.unsubscribe();
     // Create the overlay with the position strategy
     this.overlayRef = this.overlay.create({
       positionStrategy: this.positionStrategy()!,
@@ -157,23 +160,23 @@ export class NgxSelectZigzag implements ControlValueAccessor {
     this.overlayRef.attach(portal);
 
     // Close the overlay on backdrop click
-    this.overlaySubscriptions.sink = this.overlayRef.backdropClick().subscribe(() => {
-      this.isItemsDropDownOpen.set(false);
+    this.optionsDropDownOverlaySubscriptions.sink = this.overlayRef.backdropClick().subscribe(() => {
+      this.closeDropdown();
     });
   }
 
   toggleDropdown() {
-    if (this.isItemsDropDownOpen()) {
+    if (this.isOptionsDropDownOpen()) {
       this.closeDropdown();
       return;
     }
     this.openDropdown();
   }
   closeDropdown() {
-    this.isItemsDropDownOpen.set(false);
+    this.isOptionsDropDownOpen.set(false);
   }
   openDropdown() {
-    this.isItemsDropDownOpen.set(true);
+    this.isOptionsDropDownOpen.set(true);
   }
 
   selectOption(option: SelectorOption) {
@@ -207,6 +210,19 @@ export class NgxSelectZigzag implements ControlValueAccessor {
   clearValue() {
     this.value.set(undefined);
     this.multiValue.set([]);
+  }
+  inputKeyUp(value: string, event: KeyboardEvent) {
+    if (event.code === KEY_CODE_TO_OPTIONS_OVERLAY_CLOSE) {
+      this.closeOptionsDropdownOverlay();
+    } else if (
+      this.$isOptionsDropDownOpen &&
+      ['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowDown'].indexOf(event.code) === -1 /*ignore arrows*/
+    ) {
+      this.searchValue.set(value);
+    }
+    // else if (!this.optionsOpened && value) {
+    //   this.optionsOpen(value);
+    // }
   }
 
   /***
