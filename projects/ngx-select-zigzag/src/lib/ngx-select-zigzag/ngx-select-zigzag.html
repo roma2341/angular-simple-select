@@ -17,7 +17,7 @@
         {{ multiValue()?.length }} selected
       } @else if (selectedOptionVal) {
         {{ selectedOptionVal | selectorOptionLabel: labelKey() }}
-        <div (click)="clearValue()" class="clear-icon"></div>
+        <div (click)="$event.stopPropagation(); clearValue()" class="clear-icon"></div>
       }
     </div>
   }
