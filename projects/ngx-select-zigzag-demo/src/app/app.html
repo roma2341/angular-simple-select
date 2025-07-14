@@ -21,11 +21,17 @@
   <div class="examples-list default-theme">
     <div class="example-item">
       <span>Single select</span>
-      <ngx-select-zigzag [labelKey]="'label'" [valueKey]="'value'" [options]="options"></ngx-select-zigzag>
+      <ngx-select-zigzag
+        [itemsDropdownClass]="'default-theme'"
+        [labelKey]="'label'"
+        [valueKey]="'value'"
+        [options]="options"
+      ></ngx-select-zigzag>
     </div>
     <div class="example-item">
       <span>Multi select</span>
       <ngx-select-zigzag
+        [itemsDropdownClass]="'default-theme'"
         [labelKey]="'label'"
         [valueKey]="'value'"
         [options]="options"

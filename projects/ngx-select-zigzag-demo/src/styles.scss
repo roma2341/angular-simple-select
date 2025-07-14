@@ -1,1 +1,5 @@
 //@import 'projects/ngx-select-zigzag/src/themes/default_theme';
+@use 'projects/ngx-select-zigzag/src/themes/default_theme' as defaultTheme;
+.default-theme {
+  @include defaultTheme.default-theme();
+}

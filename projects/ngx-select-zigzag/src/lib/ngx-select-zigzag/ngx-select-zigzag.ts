@@ -54,6 +54,7 @@ export class NgxSelectZigzag implements ControlValueAccessor {
   multiple = input<boolean>(false);
   placeholder = input<string>('Select...');
   optionTemplate = input<TemplateRef<any>>();
+  itemsDropdownClass = input<string>();
 
   value = model<SelectorValue | undefined>(undefined);
   multiValue = model<SelectorValue[]>([]);
@@ -61,6 +62,20 @@ export class NgxSelectZigzag implements ControlValueAccessor {
   isOptionsDropDownOpen = signal(false);
   $isOptionsDropDownOpen = toObservable(this.isOptionsDropDownOpen);
   searchValue = signal<string>('');
+  filteredOptions = computed(() => {
+    const searchValue = this.searchValue();
+    if (searchValue?.length > 0) {
+      return this.options().filter((option) => {
+        const optionLabel = this.getOptionLabel(option);
+        const optionValue = this.getOptionValue(option);
+        return (
+          optionLabel.toLowerCase().includes(searchValue.toLowerCase()) ||
+          optionValue.toString().toLowerCase().includes(searchValue.toLowerCase())
+        );
+      });
+    }
+    return this.options();
+  });
 
   optionValueToOption = computed<Map<SelectorValue, SelectorOption>>(() => {
     const res = new Map<SelectorValue, SelectorOption>();
@@ -159,6 +174,7 @@ export class NgxSelectZigzag implements ControlValueAccessor {
     this.overlayRef = this.overlay.create({
       positionStrategy: this.positionStrategy()!,
       backdropClass: ['cdk-overlay-transparent-backdrop'],
+      panelClass: this.itemsDropdownClass() ? [this.itemsDropdownClass()!] : undefined,
       hasBackdrop: true,
       width: triggerWidth,
       maxHeight: 'calc(100% - 64px)',
