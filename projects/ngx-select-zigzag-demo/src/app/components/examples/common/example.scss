@@ -1,0 +1,6 @@
+@mixin example-styles() {
+  .example-item {
+    display: flex;
+    flex-direction: column;
+  }
+}

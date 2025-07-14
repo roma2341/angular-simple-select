@@ -1,44 +1,7 @@
 <div class="content-wrapper">
   <!--NON THEMED -->
-  <h2>Non-themed</h2>
-  <div class="examples-list">
-    <div class="example-item">
-      <span>Single select</span>
-      <ngx-select-zigzag [labelKey]="'label'" [valueKey]="'value'" [options]="options"></ngx-select-zigzag>
-    </div>
-    <div class="example-item">
-      <span>Multi select</span>
-      <ngx-select-zigzag
-        [labelKey]="'label'"
-        [valueKey]="'value'"
-        [options]="options"
-        [multiple]="true"
-      ></ngx-select-zigzag>
-    </div>
-  </div>
-  <!--DEFAULT THEME -->
-  <h2>Default theme</h2>
-  <div class="examples-list default-theme">
-    <div class="example-item">
-      <span>Single select</span>
-      <ngx-select-zigzag
-        [itemsDropdownClass]="'default-theme'"
-        [labelKey]="'label'"
-        [valueKey]="'value'"
-        [options]="options"
-      ></ngx-select-zigzag>
-    </div>
-    <div class="example-item">
-      <span>Multi select</span>
-      <ngx-select-zigzag
-        [itemsDropdownClass]="'default-theme'"
-        [labelKey]="'label'"
-        [valueKey]="'value'"
-        [options]="options"
-        [multiple]="true"
-      ></ngx-select-zigzag>
-    </div>
-  </div>
+  <example-1-unthemed-select></example-1-unthemed-select>
+  <example-2-themed-select></example-2-themed-select>
 
   <router-outlet />
 </div>

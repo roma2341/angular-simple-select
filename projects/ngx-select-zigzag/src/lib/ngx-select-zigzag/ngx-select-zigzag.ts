@@ -219,8 +219,8 @@ export class NgxSelectZigzag implements ControlValueAccessor {
     } else {
       this.value.set(optionVal);
       this.onChange(this.value());
+      this.closeDropdown();
     }
-    this.closeDropdown();
   }
 
   isSelected(option: SelectorValue): boolean {
