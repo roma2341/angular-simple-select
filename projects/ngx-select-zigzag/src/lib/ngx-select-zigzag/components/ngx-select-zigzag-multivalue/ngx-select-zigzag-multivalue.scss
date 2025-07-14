@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.item-wrapper {
+  border-radius: 10px;
+  padding-top: 3px;
+  padding-right: 8px;
+  padding-bottom: 3px;
+  padding-left: 8px;
+  gap: 4px;
+  background: white;
+}

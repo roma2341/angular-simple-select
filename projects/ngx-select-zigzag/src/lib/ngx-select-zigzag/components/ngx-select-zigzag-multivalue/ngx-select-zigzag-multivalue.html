@@ -1,0 +1,10 @@
+@for (item of items(); track item) {
+  <div class="item-wrapper">
+    @let _labelKey = labelKey();
+    @if (_labelKey) {
+      {{ item[_labelKey] }}
+    } @else {
+      {{ item }}
+    }
+  </div>
+}

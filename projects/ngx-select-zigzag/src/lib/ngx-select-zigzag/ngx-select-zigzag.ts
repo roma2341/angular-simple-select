@@ -23,6 +23,7 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { NgxSelectZigzagFormField } from '../features/input/ngx-select-zigzag-form-field/ngx-select-zigzag-form-field';
 import { CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { NgxSelectZigzagMultivalue } from './components/ngx-select-zigzag-multivalue/ngx-select-zigzag-multivalue';
 
 const KEY_CODE_TO_OPTIONS_OVERLAY_CLOSE = 'Escape';
 
@@ -35,6 +36,7 @@ const KEY_CODE_TO_OPTIONS_OVERLAY_CLOSE = 'Escape';
     CdkVirtualScrollViewport,
     CdkVirtualForOf,
     CdkFixedSizeVirtualScroll,
+    NgxSelectZigzagMultivalue,
   ],
   templateUrl: './ngx-select-zigzag.html',
   styleUrl: './ngx-select-zigzag.scss',
@@ -77,7 +79,7 @@ export class NgxSelectZigzag implements ControlValueAccessor {
     return this.options();
   });
 
-  optionValueToOption = computed<Map<SelectorValue, SelectorOption>>(() => {
+  valueToOption = computed<Map<SelectorValue, SelectorOption>>(() => {
     const res = new Map<SelectorValue, SelectorOption>();
     for (const option of this.options()) {
       const optionVal = this.getOptionValue(option);
@@ -90,10 +92,10 @@ export class NgxSelectZigzag implements ControlValueAccessor {
     const multiValue = this.multiValue();
     if (multiValue.length > 0) {
       return multiValue.map((val) => {
-        return this.optionValueToOption().get(val);
+        return this.valueToOption().get(val) || SelectorOptionUtils.getEmptyOptionFromValue(val, this.valueKey());
       });
     }
-    return [];
+    return [] as SelectorOption[];
     //return this.multiValue().map(v => this.getOptionLabel(v)).join(', ');
   });
 
@@ -102,7 +104,7 @@ export class NgxSelectZigzag implements ControlValueAccessor {
     if (val == null) {
       return undefined;
     }
-    return this.optionValueToOption().get(val);
+    return this.valueToOption().get(val);
   });
 
   private overlayRef?: OverlayRef;

@@ -5,6 +5,8 @@
   "compilerOptions": {
     "strict": true,
     "noImplicitOverride": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
