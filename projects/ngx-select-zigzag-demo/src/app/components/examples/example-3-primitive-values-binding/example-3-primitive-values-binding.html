@@ -16,7 +16,14 @@
       [labelKey]="'label'"
       [valueKey]="'value'"
       [options]="options"
+      [(multiValue)]="multiValue"
       [multiple]="true"
     ></ngx-select-zigzag>
+  </div>
+  <div class="example-item">
+    <label>Enter arr e.g [1,2,3]</label>
+    <span>items: {{ multiValue() | json }}</span>
+    <input #multiValueInput />
+    <button (click)="setMultiValueFromJson(multiValueInput.value)">Set new selected items</button>
   </div>
 </div>

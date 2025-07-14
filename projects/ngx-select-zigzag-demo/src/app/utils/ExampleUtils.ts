@@ -6,7 +6,7 @@ export abstract class ExampleUtils {
     for (let i = 0; i < itemsCount; i++) {
       options.push({
         label: `Item(${i})`,
-        value: `Value(${i})`,
+        value: i,
       });
     }
     return options;
