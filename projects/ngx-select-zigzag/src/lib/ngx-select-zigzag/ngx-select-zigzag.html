@@ -8,10 +8,12 @@
       @let selectedOptionVal = selectedOption();
       <div class="select-value">
         @if (multiple()) {
+          multiValueItemTemplate: {{ multiValueItemTemplate() }}
           <ngx-select-zigzag-multivalue
             [items]="selectedOptions()"
             [labelKey]="labelKey()"
             [valueKey]="valueKey()"
+            [itemTemplate]="multiValueItemTemplate()"
           ></ngx-select-zigzag-multivalue>
         } @else if (selectedOptionVal) {
           {{ selectedOptionVal | selectorOptionLabel: labelKey() }}

@@ -1,10 +1,13 @@
 @for (item of items(); track item) {
-  <div class="item-wrapper">
-    @let _labelKey = labelKey();
-    @if (_labelKey) {
-      {{ item[_labelKey] }}
-    } @else {
-      {{ item }}
-    }
-  </div>
+  <ng-template #defaultItemTemplate>
+    <div class="item-wrapper">
+      {{ itemToLabel().get(item) }}
+    </div>
+  </ng-template>
+  itemTemplate: {{ itemTemplate() }}
+  <ng-container
+    [ngTemplateOutlet]="itemTemplate() || defaultItemTemplate"
+    [ngTemplateOutletContext]="{ item, index: $index }"
+  >
+  </ng-container>
 }

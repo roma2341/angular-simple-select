@@ -3,10 +3,17 @@ import { RouterOutlet } from '@angular/router';
 import { Example1UnthemedSelect } from './components/examples/example-1-unthemed-select/example-1-unthemed-select';
 import { Example2ThemedSelect } from './components/examples/example-2-themed-select/example-2-themed-select';
 import { Example3PrimitiveValuesBinding } from './components/examples/example-3-primitive-values-binding/example-3-primitive-values-binding';
+import { Example4CustomItemTemplate } from './components/examples/example-4-custom-item-template/example-4-custom-item-template';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Example1UnthemedSelect, Example2ThemedSelect, Example3PrimitiveValuesBinding],
+  imports: [
+    RouterOutlet,
+    Example1UnthemedSelect,
+    Example2ThemedSelect,
+    Example3PrimitiveValuesBinding,
+    Example4CustomItemTemplate,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

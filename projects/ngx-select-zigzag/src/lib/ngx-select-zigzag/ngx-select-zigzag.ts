@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  contentChild,
   DestroyRef,
   inject,
   input,
@@ -24,6 +25,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { NgxSelectZigzagFormField } from '../features/input/ngx-select-zigzag-form-field/ngx-select-zigzag-form-field';
 import { CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { NgxSelectZigzagMultivalue } from './components/ngx-select-zigzag-multivalue/ngx-select-zigzag-multivalue';
+import { NgxSelectZigzagMultivalueItemTemplateDirective } from './directives/ngx-select-zigzag-multivalue-item-template/ngx-select-zigzag-multivalue-item-template.directive';
 
 const KEY_CODE_TO_OPTIONS_OVERLAY_CLOSE = 'Escape';
 
@@ -60,6 +62,10 @@ export class NgxSelectZigzag implements ControlValueAccessor {
 
   value = model<SelectorValue | undefined>(undefined);
   multiValue = model<SelectorValue[]>([]);
+
+  multiValueItemTemplate = contentChild(NgxSelectZigzagMultivalueItemTemplateDirective, {
+    read: TemplateRef,
+  });
 
   isOptionsDropDownOpen = signal(false);
   $isOptionsDropDownOpen = toObservable(this.isOptionsDropDownOpen);

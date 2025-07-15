@@ -1,4 +1,4 @@
-<h2>Items selection via code</h2>
+<h2>Custom Item Template:</h2>
 <div class="examples-list default-theme">
   <div class="example-item">
     <span>Single select</span>
@@ -16,14 +16,11 @@
       [labelKey]="'label'"
       [valueKey]="'value'"
       [options]="options"
-      [(multiValue)]="multiValue"
       [multiple]="true"
-    ></ngx-select-zigzag>
-  </div>
-  <div class="example-item">
-    <label>Enter arr e.g [1,2,3]</label>
-    <span>items: {{ multiValue() | json }}</span>
-    <input #multiValueInput />
-    <button (click)="setMultiValueFromJson(multiValueInput.value)">Set new selected items</button>
+    >
+      <ng-template ngxSelectZigzagMultivalueItemTemplate let-item="item">
+        <div class="custom-item-wrapper">{{ item.label }}-ok</div>
+      </ng-template>
+    </ngx-select-zigzag>
   </div>
 </div>
