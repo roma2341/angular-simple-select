@@ -4,7 +4,6 @@
       {{ itemToLabel().get(item) }}
     </div>
   </ng-template>
-  itemTemplate: {{ itemTemplate() }}
   <ng-container
     [ngTemplateOutlet]="itemTemplate() || defaultItemTemplate"
     [ngTemplateOutletContext]="{ item, index: $index }"
