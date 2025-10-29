@@ -1,2 +1,6 @@
+packages:
+  - 'projects/ngx-select-zigzag'
+  - 'projects/ngx-select-zigzag-demo'
 onlyBuiltDependencies:
+  - esbuild
   - lmdb
