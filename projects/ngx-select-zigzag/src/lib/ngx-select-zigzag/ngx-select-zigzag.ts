@@ -105,6 +105,14 @@ export class NgxSelectZigzag implements ControlValueAccessor {
     //return this.multiValue().map(v => this.getOptionLabel(v)).join(', ');
   });
 
+  optionToSelectedFlag = computed(() => {
+    const res = this.options().reduce<Map<SelectorOption, boolean>>((acc, opt) => {
+      acc.set(opt, false);
+      return acc;
+    }, new Map<SelectorOption, boolean>());
+    return res;
+  });
+
   selectedOption = computed(() => {
     const val = this.value();
     if (val == null) {
