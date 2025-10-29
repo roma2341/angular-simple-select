@@ -1,7 +1,17 @@
-import { ChangeDetectionStrategy, Component, computed, contentChild, input, Signal, TemplateRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  contentChild,
+  effect,
+  input,
+  Signal,
+  TemplateRef,
+} from '@angular/core';
 import { SelectorOption, SelectorValue } from '../../../../types/SelectorTypes';
 import { NgxSelectZigzagMultivalueItemTemplateDirective } from '../../directives/ngx-select-zigzag-multivalue-item-template/ngx-select-zigzag-multivalue-item-template.directive';
 import { NgTemplateOutlet } from '@angular/common';
+import { isDefined, isFunction } from '../../../../utils/value-utils';
 
 @Component({
   selector: 'ngx-select-zigzag-multivalue',
@@ -15,6 +25,8 @@ export class NgxSelectZigzagMultivalue {
   labelKey = input<string | undefined>();
   valueKey = input<string | undefined>();
 
+  readonly trackByOption = input.required<TrackFn>();
+
   itemToLabel = computed(() => {
     const _labelKey = this.labelKey();
     return this.items().reduce<Map<SelectorValue, string>>((acc, item) => {
@@ -27,3 +39,4 @@ export class NgxSelectZigzagMultivalue {
   itemTemplate = input<TemplateRef<any>>();
   // @ContentChild(NgOptionTemplateDirective, { read: TemplateRef }) optionTemplate: TemplateRef<any>;
 }
+type TrackFn = (a: number, b: SelectorOption) => any;

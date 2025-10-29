@@ -1,0 +1,30 @@
+<h2>CompareWith:</h2>
+<div class="examples-list">
+  <div class="example-item">
+    <span>Single select</span>
+    <ngx-select-zigzag
+      [labelKey]="'label'"
+      [valueKey]="'value'"
+      [options]="options()"
+      [compareWith]="comparator"
+      [(value)]="selectedItem"
+    ></ngx-select-zigzag>
+  </div>
+  <div class="example-item">
+    <span>Multi select</span>
+    <ngx-select-zigzag
+      [labelKey]="'label'"
+      [valueKey]="'value'"
+      [options]="options()"
+      [multiple]="true"
+      [compareWith]="comparator"
+      [(multiValue)]="selectedItems"
+      [trackByFn]="trackByFn"
+    ></ngx-select-zigzag>
+  </div>
+  <p>selectedItem: {{ selectedItem() | json }}</p>
+  <p>selectedItems: {{ selectedItems() | json }}</p>
+  <button (click)="deepCloneSelectedItem()">Deep Clone selected item</button>
+  <button (click)="deepCloneSelectedItems()">Deep Clone selected items</button>
+  <button (click)="deepCloneOptions()">Deep Clone options</button>
+</div>

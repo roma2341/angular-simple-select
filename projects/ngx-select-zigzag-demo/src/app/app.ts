@@ -4,6 +4,7 @@ import { Example1UnthemedSelect } from './components/examples/example-1-unthemed
 import { Example2ThemedSelect } from './components/examples/example-2-themed-select/example-2-themed-select';
 import { Example3PrimitiveValuesBinding } from './components/examples/example-3-primitive-values-binding/example-3-primitive-values-binding';
 import { Example4CustomItemTemplate } from './components/examples/example-4-custom-item-template/example-4-custom-item-template';
+import { Example5CompareWith } from './components/examples/example-5-compare-with/example-5-compare-with';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { Example4CustomItemTemplate } from './components/examples/example-4-cust
     Example2ThemedSelect,
     Example3PrimitiveValuesBinding,
     Example4CustomItemTemplate,
+    Example5CompareWith,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

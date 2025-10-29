@@ -26,6 +26,7 @@ import { NgxSelectZigzagFormField } from '../features/input/ngx-select-zigzag-fo
 import { CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { NgxSelectZigzagMultivalue } from './components/ngx-select-zigzag-multivalue/ngx-select-zigzag-multivalue';
 import { NgxSelectZigzagMultivalueItemTemplateDirective } from './directives/ngx-select-zigzag-multivalue-item-template/ngx-select-zigzag-multivalue-item-template.directive';
+import { isDefined, isFunction } from '../../utils/value-utils';
 
 const KEY_CODE_TO_OPTIONS_OVERLAY_CLOSE = 'Escape';
 
@@ -52,16 +53,33 @@ export class NgxSelectZigzag implements ControlValueAccessor {
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly destroyRef = inject(DestroyRef);
 
-  options = input<SelectorOption[]>([]);
-  labelKey = input<string | undefined>();
-  valueKey = input<string | undefined>();
-  multiple = input<boolean>(false);
-  placeholder = input<string>('Select...');
-  optionTemplate = input<TemplateRef<any>>();
-  itemsDropdownClass = input<string>();
+  readonly options = input<SelectorOption[]>([]);
+  readonly labelKey = input<string | undefined>();
+  readonly valueKey = input<string | undefined>();
+  readonly multiple = input<boolean>(false);
+  readonly placeholder = input<string>('Select...');
+  readonly optionTemplate = input<TemplateRef<any>>();
+  readonly itemsDropdownClass = input<string>();
+  readonly trackByFn = input(undefined, {
+    transform: (fn: TrackFn | undefined) => {
+      if (isDefined(fn) && !isFunction(fn)) {
+        throw Error('`trackByFn` must be a function.');
+      }
+      return fn;
+    },
+  });
 
-  value = model<SelectorValue | undefined>(undefined);
-  multiValue = model<SelectorValue[]>([]);
+  readonly value = model<SelectorValue | undefined>(undefined);
+  readonly multiValue = model<SelectorValue[]>([]);
+
+  readonly compareWith = input(undefined, {
+    transform: (fn: CompareWithFn | undefined) => {
+      if (isDefined(fn) && !isFunction(fn)) {
+        throw Error('`compareWith` must be a function.');
+      }
+      return fn;
+    },
+  });
 
   multiValueItemTemplate = contentChild(NgxSelectZigzagMultivalueItemTemplateDirective, {
     read: TemplateRef,
@@ -105,7 +123,10 @@ export class NgxSelectZigzag implements ControlValueAccessor {
     //return this.multiValue().map(v => this.getOptionLabel(v)).join(', ');
   });
 
-  selectedOptionsSet = computed(() => {
+  selectedOptionsKeySet = computed(() => {
+    const keys = this.selectedOptions().map((opt) => {
+      return;
+    });
     return new Set(this.selectedOptions());
   });
 
@@ -233,11 +254,21 @@ export class NgxSelectZigzag implements ControlValueAccessor {
     }
   }
 
-  isValueSelected(value: SelectorValue): boolean {
-    return this.multiple() ? this.multiValue().includes(value) : this.value() === value;
-  }
+  // isValueSelected(value: SelectorValue): boolean {
+  //   return this.multiple() ? this.multiValue().includes(value) : this.value() === value;
+  // }
   isOptionSelected(opt: SelectorOption): boolean {
-    return this.selectedOptionsSet().has(opt);
+    const comparator = this.compareWith();
+    if (comparator) {
+      const val = SelectorOptionUtils.getOptionValue(opt);
+      return this.selectedOptions().findIndex((o) => comparator(o, val)) !== -1;
+    }
+    const val = SelectorOptionUtils.getOptionValue(opt, this.valueKey());
+    if (this.multiple()) {
+      return this.multiValue().includes(val);
+    } else {
+      return this.value() === val;
+    }
   }
 
   getOptionValue(option: SelectorOption): SelectorValue {
@@ -264,6 +295,14 @@ export class NgxSelectZigzag implements ControlValueAccessor {
     // }
   }
 
+  trackByOption = (_: number, opt: SelectorOption) => {
+    const tracker = this.trackByFn();
+    if (tracker) {
+      return tracker(opt);
+    }
+    return opt;
+  };
+
   /***
    CVA
    ***/
@@ -272,7 +311,7 @@ export class NgxSelectZigzag implements ControlValueAccessor {
   private onTouched = () => {};
 
   writeValue(value: any): void {
-    this.value = value;
+    this.value.set(value);
   }
 
   registerOnChange(fn: any): void {
@@ -283,3 +322,6 @@ export class NgxSelectZigzag implements ControlValueAccessor {
     this.onTouched = fn;
   }
 }
+
+type CompareWithFn = (a: any, b: any) => boolean;
+type TrackFn = (a: any) => any;

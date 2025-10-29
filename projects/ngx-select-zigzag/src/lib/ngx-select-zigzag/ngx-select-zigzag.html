@@ -13,6 +13,7 @@
             [labelKey]="labelKey()"
             [valueKey]="valueKey()"
             [itemTemplate]="multiValueItemTemplate()"
+            [trackByOption]="trackByOption"
           ></ngx-select-zigzag-multivalue>
         } @else if (selectedOptionVal) {
           {{ selectedOptionVal | selectorOptionLabel: labelKey() }}
@@ -38,7 +39,7 @@
         </ngx-select-zigzag-form-field>
       </div>
       <cdk-virtual-scroll-viewport [itemSize]="34" class="options-viewport">
-        <div *cdkVirtualFor="let option of filteredOptions()" class="example-item">
+        <div *cdkVirtualFor="let option of filteredOptions(); trackBy: trackByOption" class="example-item">
           @let isSelected = isOptionSelected(option);
           <div class="options-dropdown-item" (click)="selectOption(option)" [class.selected]="isSelected">
             @if (optionTemplate()) {

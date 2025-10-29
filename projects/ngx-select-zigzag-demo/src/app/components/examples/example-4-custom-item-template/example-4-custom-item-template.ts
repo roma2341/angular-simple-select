@@ -3,7 +3,7 @@ import { NgxSelectZigzag, NgxSelectZigzagMultivalueItemTemplateDirective } from 
 import { ExampleUtils } from '../../../utils/ExampleUtils';
 
 @Component({
-  selector: 'app-example-4-custom-item-template',
+  selector: 'example-4-custom-item-template',
   imports: [NgxSelectZigzag, NgxSelectZigzagMultivalueItemTemplateDirective],
   templateUrl: './example-4-custom-item-template.html',
   styleUrl: './example-4-custom-item-template.scss',

@@ -1,4 +1,4 @@
-@for (item of items(); track item) {
+@for (item of items(); track trackByOption()($index, item)) {
   <ng-template #defaultItemTemplate>
     <div class="item-wrapper">
       {{ itemToLabel().get(item) }}
