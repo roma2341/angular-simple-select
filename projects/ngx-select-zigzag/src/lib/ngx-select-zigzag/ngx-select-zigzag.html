@@ -39,7 +39,7 @@
       </div>
       <cdk-virtual-scroll-viewport [itemSize]="34" class="options-viewport">
         <div *cdkVirtualFor="let option of filteredOptions()" class="example-item">
-          @let isSelected = optionToSelectedFlag().get(option);
+          @let isSelected = isOptionSelected(option);
           <div class="options-dropdown-item" (click)="selectOption(option)" [class.selected]="isSelected">
             @if (optionTemplate()) {
               <ng-container *ngTemplateOutlet="optionTemplate; context: { $implicit: option }"></ng-container>
