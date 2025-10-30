@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { ExampleUtils } from '../../../utils/ExampleUtils';
 import { NgxSelectZigzag } from 'ngx-select-zigzag';
 import { OptionItem } from '../../../utils/types';
 import { JsonPipe } from '@angular/common';
+import { generateRandomOptions } from '../../../utils/ExampleUtils';
 
 @Component({
   selector: 'example-5-compare-with',
@@ -12,7 +12,7 @@ import { JsonPipe } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Example5CompareWith {
-  protected options = signal(ExampleUtils.generateRandomOptions(1000));
+  protected options = signal(generateRandomOptions(1000));
   protected selectedItems = signal<OptionItem[]>([]);
   protected selectedItem = signal<OptionItem | undefined>(undefined);
   protected comparator = (a: OptionItem, b: OptionItem) => {

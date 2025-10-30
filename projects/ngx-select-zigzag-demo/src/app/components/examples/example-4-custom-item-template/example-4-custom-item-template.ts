@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgxSelectZigzag, NgxSelectZigzagMultivalueItemTemplateDirective } from 'ngx-select-zigzag';
-import { ExampleUtils } from '../../../utils/ExampleUtils';
+import { generateRandomOptions } from '../../../utils/ExampleUtils';
 
 @Component({
   selector: 'example-4-custom-item-template',
@@ -10,5 +10,5 @@ import { ExampleUtils } from '../../../utils/ExampleUtils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Example4CustomItemTemplate {
-  protected options = ExampleUtils.generateRandomOptions(1000);
+  protected options = generateRandomOptions(1000);
 }

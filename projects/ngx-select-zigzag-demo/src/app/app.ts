@@ -5,6 +5,7 @@ import { Example2ThemedSelect } from './components/examples/example-2-themed-sel
 import { Example3PrimitiveValuesBinding } from './components/examples/example-3-primitive-values-binding/example-3-primitive-values-binding';
 import { Example4CustomItemTemplate } from './components/examples/example-4-custom-item-template/example-4-custom-item-template';
 import { Example5CompareWith } from './components/examples/example-5-compare-with/example-5-compare-with';
+import { Example6LongLabels } from './components/examples/example-6-long-labels/example-6-long-labels';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ import { Example5CompareWith } from './components/examples/example-5-compare-wit
     Example3PrimitiveValuesBinding,
     Example4CustomItemTemplate,
     Example5CompareWith,
+    Example6LongLabels,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
